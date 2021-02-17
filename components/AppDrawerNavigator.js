@@ -5,16 +5,19 @@ import CustomSideBarMenu from './CustomSideBarMenu';
 import SettingScreen from '../screens/SettingScreen'
 
 export const AppDrawerNavigator = createDrawerNavigator({
-  Home : {
-    screen : AppTabNavigator
-    },
-  Setting : {
-    screen : SettingScreen
-   },
+  Home: {
+    screen: AppTabNavigator
+  },
+  MyDonations: {
+    screen: MyDonationScreen
+  },
+  Setting: {
+    screen: SettingScreen
+  },
+},
+  {
+    contentComponent: CustomSideBarMenu
   },
   {
-    contentComponent:CustomSideBarMenu
-  },
-  {
-    initialRouteName : 'Home'
+    initialRouteName: 'Home'
   })
