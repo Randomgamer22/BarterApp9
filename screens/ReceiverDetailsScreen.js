@@ -11,7 +11,7 @@ export default class ReceiverDetailsScreen extends Component {
       userId: firebase.auth().currentUser.email,
       recieverId: this.props.navigation.getParam('details')['userId'],
       requestId: this.props.navigation.getParam('details')['requestId'],
-      bookName: this.props.navigation.getParam('details')['bookName'],
+      itemName: this.props.navigation.getParam('details')['bookName'],
       reasonForRequesting: this.props.navigation.getParam('details')[
         'reasonToRequest'
       ],
@@ -52,7 +52,7 @@ export default class ReceiverDetailsScreen extends Component {
 
   updateItemStatus = () => {
     db.collection('all_donations').add({
-      bookName: this.state.bookName,
+      itemName: this.state.itemName,
       requestId: this.state.requestId,
       requestedBy: this.state.recieverName,
       donorId: this.state.userId,
@@ -66,7 +66,7 @@ export default class ReceiverDetailsScreen extends Component {
       "targeted_user_id": this.state.recieverId,
       "donor_id": this.state.userId,
       "request_id": this.state.requestId,
-      "book_name": this.state.bookName,
+      "item_name": this.state.itemName,
       "date": firebase.firestore.FieldValue.serverTimestamp(),
       "notification_status": "unread",
       "message": message
@@ -96,7 +96,7 @@ export default class ReceiverDetailsScreen extends Component {
           <Card title={'Receiver Information'} titleStyle={{ fontSize: 20 }}>
             <Card>
               <Text style={{ fontWeight: 'bold' }}>
-                Name : {this.state.bookName}
+                Name : {this.state.itemName}
               </Text>
             </Card>
             <Card>
