@@ -5,7 +5,7 @@ import MyHeader from '../components/MyHeader.js'
 import firebase from 'firebase';
 import db from '../config.js'
 
-export default class MyDonationScreen extends Component {
+export default class MyBarterScreen extends Component {
   static navigationOptions = { header: null };
 
    constructor(){
