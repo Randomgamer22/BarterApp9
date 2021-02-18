@@ -28,7 +28,7 @@ export default class MyBarterScreen extends Component {
       })
   }
 
-  sendNotification = (itemDetails, requestStatus) => {
+  addNotification = (itemDetails, requestStatus) => {
     var requestId = itemDetails.request_id
     var donorId = itemDetails.donor_id
     db.collection("all_notifications")
@@ -37,13 +37,10 @@ export default class MyBarterScreen extends Component {
       .get()
       .then((snapshot) => {
         snapshot.forEach((doc) => {
-          //console.log("inside sendNotification:"+doc);
           var message = ""
           if (requestStatus === "Item Sent") {
-            // console.log("message sent item")
             message = this.state.donorName + " sent you item"
           } else {
-            // console.log("message shown interest")
             message = this.state.donorName + " has shown interest in donating theitem"
           }
           db.collection("all_notifications").doc(doc.id).update({
@@ -55,23 +52,23 @@ export default class MyBarterScreen extends Component {
       })
   }
 
-  sendItem=(itemDetails)=>{
-    if(itemDetails.request_status === "Item Sent"){
+  sendItem = (itemDetails) => {
+    if (itemDetails.request_status === "Item Sent") {
       //console.log("inside Donor Interested")
       var requestStatus = "Donor Interested"
       db.collection("all_donations").doc(itemDetails.doc_id).update({
-        "request_status" : "Donor Interested"
+        "request_status": "Donor Interested"
       })
-      this.sendNotification(itemDetails,requestStatus)
+      this.sendNotification(itemDetails, requestStatus)
     }
-    else{
-       //console.log("inside Item Sent"+itemDetails.doc_id)
+    else {
+      //console.log("inside Item Sent"+itemDetails.doc_id)
       var requestStatus = "Item Sent"
       db.collection("all_donations").doc(itemDetails.doc_id).update({
-        "request_status" : "Item Sent"
+        "request_status": "Item Sent"
       })
-     // console.log("done update for all donations"+itemDetails.doc_id);
-      this.sendNotification(itemDetails,requestStatus)
+      // console.log("done update for all donations"+itemDetails.doc_id);
+      this.addNotification(itemDetails, requestStatus)
     }
   }
 
@@ -85,7 +82,7 @@ export default class MyBarterScreen extends Component {
       leftElement={<Icon name="book" type="font-awesome" color='#696969' />}
       titleStyle={{ color: 'black', fontWeight: 'bold' }}
       rightElement={
-        <TouchableOpacity style={styles.button} onPress = {()=>{
+        <TouchableOpacity style={styles.button} onPress={() => {
           this.sendItem(item)
         }}>
           <Text style={{ color: '#ffff' }}>Send Book</Text>
